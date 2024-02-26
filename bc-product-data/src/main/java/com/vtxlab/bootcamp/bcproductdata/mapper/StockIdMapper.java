@@ -8,13 +8,13 @@ import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 public class StockIdMapper {
 
   
-  public StockId mapCoinId(StockIdEntity entity) {
+  public StockId mapSymbolId(StockIdEntity entity) {
     return StockId.builder() //
                  .stockId(entity.getStockId()) //
                  .build();
   }
 
-  public StockIdEntity mapCoinId(StockId id) {
+  public StockIdEntity mapSymbolIdEntity(StockId id) {
     return StockIdEntity.builder() //
                  .stockId(id.getStockId()) //
                  .build();

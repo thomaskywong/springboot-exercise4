@@ -13,7 +13,7 @@ import com.vtxlab.bootcamp.bcproductdata.infra.Syscode;
 public class GlobalExceptionHandler {
 
   @ExceptionHandler(InvalidCoinException.class)
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+  @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
   public ApiResponse<Void> InvalidCoinExceptionHandler(
       InvalidCoinException ex) {
     return ApiResponse.<Void>builder() //
@@ -23,11 +23,21 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(InvalidCurrencyException.class)
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+  @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
   public ApiResponse<Void> InvalidCurrencyExceptionHandler(
       InvalidCurrencyException ex) {
     return ApiResponse.<Void>builder() //
         .status(Syscode.INVALID_CURRENCY) //
+        .data(null) //
+        .build();
+  }
+
+  @ExceptionHandler(InvalidStockSymbolException.class)
+  @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
+  public ApiResponse<Void> InvalidStockSymbolExceptionHandler(
+      InvalidStockSymbolException ex) {
+    return ApiResponse.<Void>builder() //
+        .status(Syscode.INVALID_STOCK_SYMBOL) //
         .data(null) //
         .build();
   }

@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "Stock_ids")
+@Table(name = "tproduct_stocks")
 public class StockIdEntity {
   
   @Id

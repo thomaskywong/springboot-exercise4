@@ -16,7 +16,8 @@ api:
       basepath: "/stock/finnhub/api/v1"
       endpoints:
         quote: "/quote"
-        prodile2: "/profiles"
+        profile2: "/profiles"
+        symbols: "/symbols"
 
 database:
   postgres: "db_quote"

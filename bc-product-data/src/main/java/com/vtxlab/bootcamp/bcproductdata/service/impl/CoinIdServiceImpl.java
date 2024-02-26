@@ -40,13 +40,12 @@ public class CoinIdServiceImpl implements CoinIdService {
         .collect(Collectors.toSet());
 
     for (CoinId id : ids) {
-
       if (!(Coin.isValidCoin(coins, id.getCoinId()))) {
         throw new InvalidCoinException(Syscode.INVALID_COIN);
       }
-
-      coinIds.add(id);
     }
+
+    coinIds.addAll(ids);
 
     List<CoinIdEntity> entities = coinIds.stream() //
         .map(e -> coinIdMapper.mapCoinIdEntity(e)) //
@@ -62,7 +61,7 @@ public class CoinIdServiceImpl implements CoinIdService {
   }
 
   @Override
-  public List<CoinId> getCoinId() throws JsonProcessingException {
+  public List<CoinId> getCoinIds() throws JsonProcessingException {
 
     List<CoinIdEntity> updatedEntities = coinIdRepository.findAll();
 
@@ -88,8 +87,6 @@ public class CoinIdServiceImpl implements CoinIdService {
     }
 
     coinIds.removeAll(ids);
-
-    System.out.println(coinIds);
 
     List<CoinIdEntity> entities = coinIds.stream() //
         .map(e -> coinIdMapper.mapCoinIdEntity(e)) //

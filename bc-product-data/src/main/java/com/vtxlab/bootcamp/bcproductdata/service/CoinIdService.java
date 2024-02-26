@@ -8,7 +8,7 @@ public interface CoinIdService {
 
   List<CoinId> setCoinId(List<CoinId> ids) throws JsonProcessingException;
 
-  List<CoinId> getCoinId() throws JsonProcessingException;
+  List<CoinId> getCoinIds() throws JsonProcessingException;
 
   Boolean deleteCoinId(List<CoinId> id) throws JsonProcessingException;
 

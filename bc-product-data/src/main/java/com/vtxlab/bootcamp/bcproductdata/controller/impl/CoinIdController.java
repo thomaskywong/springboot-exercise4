@@ -23,14 +23,12 @@ public class CoinIdController implements CoinIdOperation {
 
   @Override
   public List<CoinId> setCoinIds(List<CoinId> coins) throws JsonProcessingException{
-    
     return coinIdService.setCoinId(coins);
-
   }
 
   @Override
   public List<CoinId> getCoinIds() throws JsonProcessingException{
-    return coinIdService.getCoinId();
+    return coinIdService.getCoinIds();
   }
 
   @Override
