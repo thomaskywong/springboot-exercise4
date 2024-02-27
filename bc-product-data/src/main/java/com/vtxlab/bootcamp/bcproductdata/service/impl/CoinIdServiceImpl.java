@@ -12,8 +12,10 @@ import com.vtxlab.bootcamp.bcproductdata.dto.jph.Coin;
 import com.vtxlab.bootcamp.bcproductdata.entity.CoinIdEntity;
 import com.vtxlab.bootcamp.bcproductdata.exception.InvalidCoinException;
 import com.vtxlab.bootcamp.bcproductdata.infra.ApiResponse;
+import com.vtxlab.bootcamp.bcproductdata.infra.Scheme;
 import com.vtxlab.bootcamp.bcproductdata.infra.Syscode;
 import com.vtxlab.bootcamp.bcproductdata.mapper.CoinIdMapper;
+import com.vtxlab.bootcamp.bcproductdata.mapper.UriCompBuilder;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
 import com.vtxlab.bootcamp.bcproductdata.repository.CoinIdRepository;
 import com.vtxlab.bootcamp.bcproductdata.service.CoinIdService;
@@ -127,8 +129,9 @@ public class CoinIdServiceImpl implements CoinIdService {
 
   @Override
   public List<Coin> getCoins() throws JsonProcessingException {
-    String urlString = "http://localhost:8090/crypto/coingecko/api/v1/coins/list";
+    // String urlString = "http://localhost:8090/crypto/coingecko/api/v1/coins/list";
 
+    String urlString = UriCompBuilder.url(Scheme.HTTP, host, port, basepath, listEndpoint);
     ApiResponse<List<Coin>> apiResp = restTemplate.getForObject(urlString, ApiResponse.class);
 
     return apiResp.getData();
