@@ -1,5 +1,6 @@
 package com.vtxlab.bootcamp.bcproductdata.entity;
 
+import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table(name = "tproduct_coins")
-public class CoinIdEntity {
+public class CoinIdEntity implements Serializable{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

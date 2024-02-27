@@ -18,41 +18,40 @@ public class UriCompBuilder {
         .toUriString();
   }
 
-    public static String url(Scheme scheme, String host, int port, String basepath,
-        String endpoint) {
-  
-      return UriComponentsBuilder.newInstance() //
-          .scheme(scheme.name().toLowerCase()) //
-          .host(host) //
-          .port(port)
-          .path(basepath) //
-          .path(endpoint) //
-          .toUriString();
-    }
+  public static String url(Scheme scheme, String host, int port,
+      String basepath, String endpoint) {
+
+    return UriComponentsBuilder.newInstance() //
+        .scheme(scheme.name().toLowerCase()) //
+        .host(host) //
+        .port(port).path(basepath) //
+        .path(endpoint) //
+        .toUriString();
+  }
 
   // public static String url(Scheme scheme, String domain, String basepath,
-  //     String endpoint, String key) {
+  // String endpoint, String key) {
 
 
-  //   return UriComponentsBuilder.newInstance() //
-  //       .scheme(scheme.name().toLowerCase()) //
-  //       .host(domain) //
-  //       .path(basepath) //
-  //       .path(endpoint) //
-  //       .queryParam("x_cg_demo_api_key", key) //
-  //       .toUriString();
+  // return UriComponentsBuilder.newInstance() //
+  // .scheme(scheme.name().toLowerCase()) //
+  // .host(domain) //
+  // .path(basepath) //
+  // .path(endpoint) //
+  // .queryParam("x_cg_demo_api_key", key) //
+  // .toUriString();
   // }
 
   // public static String url(Scheme scheme, String domain, String basepath,
-  //     String endpoint, Currency currency, String key) {
-  //   return UriComponentsBuilder.newInstance() //
-  //       .scheme(scheme.name().toLowerCase()) //
-  //       .host(domain) //
-  //       .path(basepath) //
-  //       .path(endpoint) //
-  //       .queryParam("vs_currency", currency.name().toLowerCase()) //
-  //       .queryParam("x_cg_demo_api_key", key) //
-  //       .toUriString();
+  // String endpoint, Currency currency, String key) {
+  // return UriComponentsBuilder.newInstance() //
+  // .scheme(scheme.name().toLowerCase()) //
+  // .host(domain) //
+  // .path(basepath) //
+  // .path(endpoint) //
+  // .queryParam("vs_currency", currency.name().toLowerCase()) //
+  // .queryParam("x_cg_demo_api_key", key) //
+  // .toUriString();
   // }
 
   public static String url(Scheme scheme, String domain, String basepath,
@@ -82,29 +81,45 @@ public class UriCompBuilder {
   }
 
   public static String url(Scheme scheme, String domain, String basepath,
-  String endpoint, Currency currency, String... ids) {
+      String endpoint, Currency currency, String... ids) {
 
-StringBuilder idsString = new StringBuilder("");
+    StringBuilder idsString = new StringBuilder("");
 
-for (int i = 0; i < ids.length; i++) {
-  idsString.append(ids[i]);
-  if (i < ids.length - 1) {
-    idsString.append(",");
+    for (int i = 0; i < ids.length; i++) {
+      idsString.append(ids[i]);
+      if (i < ids.length - 1) {
+        idsString.append(",");
+      }
+    }
+
+
+    String urlString = UriComponentsBuilder.newInstance() //
+        .scheme(scheme.name().toLowerCase()) //
+        .host(domain) //
+        .path(basepath) //
+        .path(endpoint) //
+        .queryParam("currency", currency.name().toLowerCase()) //
+        .queryParam("ids", idsString.toString()) //
+        .toUriString();
+
+    return urlString;
   }
-}
 
+  public static String urlCoinsMarket(Scheme scheme, String host, int port,
+      String basepath, String endpoint, Currency currency, String ids) {
 
-String urlString = UriComponentsBuilder.newInstance() //
-    .scheme(scheme.name().toLowerCase()) //
-    .host(domain) //
-    .path(basepath) //
-    .path(endpoint) //
-    .queryParam("currency", currency.name().toLowerCase()) //
-    .queryParam("ids", idsString.toString()) //
-    .toUriString();
+    String urlString = UriComponentsBuilder.newInstance() //
+        .scheme(scheme.name().toLowerCase()) //
+        .host(host) //
+        .port(port) //
+        .path(basepath) //
+        .path(endpoint) //
+        .queryParam("currency", currency.name().toLowerCase()) //
+        .queryParam("ids", ids) //
+        .toUriString();
 
-return urlString;
-}
+    return urlString;
+  }
 
 
 }
