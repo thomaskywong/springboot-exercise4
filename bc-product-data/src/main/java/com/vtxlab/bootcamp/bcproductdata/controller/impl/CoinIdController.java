@@ -18,9 +18,6 @@ public class CoinIdController implements CoinIdOperation {
   @Autowired
   private CoinIdService coinIdService;
 
-  @Autowired
-  private CryptoService cryptoService;
-
   @Override
   public List<CoinId> setCoinIds(List<CoinId> coins) throws JsonProcessingException{
     return coinIdService.setCoinId(coins);
@@ -33,7 +30,7 @@ public class CoinIdController implements CoinIdOperation {
 
   @Override
   public List<Coin> getCoins() throws JsonProcessingException {
-    return cryptoService.getCoins();
+    return coinIdService.getCoins();
   }
 
   @Override

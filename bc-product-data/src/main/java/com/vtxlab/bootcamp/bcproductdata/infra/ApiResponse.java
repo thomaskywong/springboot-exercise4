@@ -1,11 +1,13 @@
 package com.vtxlab.bootcamp.bcproductdata.infra;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @EqualsAndHashCode
+@AllArgsConstructor
 @ToString
 public class ApiResponse<T> {
 

@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vtxlab.bootcamp.bcproductdata.dto.jph.Coin;
 import com.vtxlab.bootcamp.bcproductdata.entity.CoinIdEntity;
 import com.vtxlab.bootcamp.bcproductdata.exception.InvalidCoinException;
+import com.vtxlab.bootcamp.bcproductdata.infra.ApiResponse;
 import com.vtxlab.bootcamp.bcproductdata.infra.Syscode;
 import com.vtxlab.bootcamp.bcproductdata.mapper.CoinIdMapper;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
@@ -18,6 +21,21 @@ import com.vtxlab.bootcamp.bcproductdata.service.CryptoService;
 
 @Service
 public class CoinIdServiceImpl implements CoinIdService {
+
+  @Value(value = "${api.internal.crypto.host}")
+  private String host;
+
+  @Value(value = "${api.internal.crypto.port}")
+  private int port;
+
+  @Value(value = "${api.internal.crypto.basepath}")
+  private String basepath;
+
+  @Value(value = "${api.internal.crypto.endpoints.list}")
+  private String listEndpoint;
+
+  @Autowired
+  private RestTemplate restTemplate;
 
   @Autowired
   private CoinIdRepository coinIdRepository;
@@ -81,7 +99,7 @@ public class CoinIdServiceImpl implements CoinIdService {
         .collect(Collectors.toSet());
 
     for (CoinId id : ids) {
-      if (!(coinIds.contains(id))){
+      if (!(coinIds.contains(id))) {
         return false;
       }
     }
@@ -101,10 +119,20 @@ public class CoinIdServiceImpl implements CoinIdService {
 
   @Override
   public Boolean deleteAllCoinIds() throws JsonProcessingException {
-    
+
     coinIdRepository.deleteAll();
 
     return true;
+  }
+
+  @Override
+  public List<Coin> getCoins() throws JsonProcessingException {
+    String urlString = "http://localhost:8090/crypto/coingecko/api/v1/coins/list";
+
+    ApiResponse<List<Coin>> apiResp = restTemplate.getForObject(urlString, ApiResponse.class);
+
+    return apiResp.getData();
+
   }
 
 }
