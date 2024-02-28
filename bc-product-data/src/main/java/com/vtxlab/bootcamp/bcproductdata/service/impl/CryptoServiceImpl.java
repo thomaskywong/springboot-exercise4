@@ -10,13 +10,16 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vtxlab.bootcamp.bcproductdata.dto.jph.Market;
+import com.vtxlab.bootcamp.bcproductdata.entity.MarketEntity;
 import com.vtxlab.bootcamp.bcproductdata.exception.CoingeckoNotAvailableException;
 import com.vtxlab.bootcamp.bcproductdata.infra.Currency;
 import com.vtxlab.bootcamp.bcproductdata.infra.Scheme;
 import com.vtxlab.bootcamp.bcproductdata.infra.Syscode;
+import com.vtxlab.bootcamp.bcproductdata.mapper.MarketMapper;
 import com.vtxlab.bootcamp.bcproductdata.mapper.UriCompBuilder;
 import com.vtxlab.bootcamp.bcproductdata.model.ApiRespMarkets;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
+import com.vtxlab.bootcamp.bcproductdata.repository.MarketRepository;
 import com.vtxlab.bootcamp.bcproductdata.service.CoinIdService;
 import com.vtxlab.bootcamp.bcproductdata.service.CryptoService;
 
@@ -47,6 +50,12 @@ public class CryptoServiceImpl implements CryptoService {
   @Autowired
   private ObjectMapper objectMapper;
 
+  @Autowired
+  private MarketMapper  marketMapper;
+
+  @Autowired
+  private MarketRepository marketRepository;
+
   @Override
   public void storeCoinsToDB() throws JsonProcessingException {
 
@@ -68,7 +77,11 @@ public class CryptoServiceImpl implements CryptoService {
 
     List<Market> markets = apiResp.getData();
 
-    // System.out.println(markets);
+    List<MarketEntity> entities = markets.stream() //
+                                        .map( e -> marketMapper.mapMarketEntity(e, Currency.USD)) //
+                                        .collect(Collectors.toList()); 
+    
+    marketRepository.saveAll(entities);
     
 
   }
