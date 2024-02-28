@@ -8,14 +8,19 @@ import com.vtxlab.bootcamp.bcproductdata.controller.CryptoOperation;
 import com.vtxlab.bootcamp.bcproductdata.service.CryptoService;
 
 @RestController
-@RequestMapping(value = "/crypto/coingecko/api/v1")
+@RequestMapping(value = "/crypto/database/api/v1")
 public class CryptoController implements CryptoOperation {
 
   @Autowired
   private CryptoService cryptoService;
 
-  public void storeCoinsToDB() throws JsonProcessingException {
-    cryptoService.storeCoinsToDB();
+  public Boolean storeCoinsToDB() throws JsonProcessingException {
+    return cryptoService.storeCoinsToDB();
+  }
+
+  @Override
+  public Boolean clearCoinsFromDB() throws JsonProcessingException {
+    return cryptoService.clearCoinsFromDB();
   }
 
 }

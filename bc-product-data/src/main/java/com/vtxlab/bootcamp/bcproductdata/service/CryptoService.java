@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface CryptoService {
 
-  void storeCoinsToDB() throws JsonProcessingException;
+  Boolean storeCoinsToDB() throws JsonProcessingException;
+
+  Boolean clearCoinsFromDB() throws JsonProcessingException;
   
 }

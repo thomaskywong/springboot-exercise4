@@ -11,6 +11,10 @@ public interface CryptoOperation {
 
   @GetMapping(value = "/coins/markets/save")
   @ResponseStatus(value = HttpStatus.OK)
-  void storeCoinsToDB() throws JsonProcessingException;
+  Boolean storeCoinsToDB() throws JsonProcessingException;
+
+  @GetMapping(value = "/coins/markets/clear")
+  @ResponseStatus(value = HttpStatus.OK)
+  Boolean clearCoinsFromDB() throws JsonProcessingException;
 
 }

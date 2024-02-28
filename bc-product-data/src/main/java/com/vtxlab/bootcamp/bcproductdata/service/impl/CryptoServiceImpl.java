@@ -57,7 +57,7 @@ public class CryptoServiceImpl implements CryptoService {
   private MarketRepository marketRepository;
 
   @Override
-  public void storeCoinsToDB() throws JsonProcessingException {
+  public Boolean storeCoinsToDB() throws JsonProcessingException {
 
     List<CoinId> coinIds = coinIdService.getCoinIds();
 
@@ -83,7 +83,13 @@ public class CryptoServiceImpl implements CryptoService {
     
     marketRepository.saveAll(entities);
     
+    return true;
+  }
 
+  @Override
+  public Boolean clearCoinsFromDB() throws JsonProcessingException {
+    marketRepository.deleteAll();
+    return true;
   }
 
   
