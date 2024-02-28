@@ -17,7 +17,12 @@ public class QuoteController implements QuoteOperation{
 
     @Override
     public Boolean saveQuoteToDB() throws JsonProcessingException {
-      return finnhubService.saveQuoteToDB();
+      return finnhubService.saveQuotesToDB();
+    }
+
+    @Override
+    public Boolean clearQuotesFromDB() throws JsonProcessingException {
+      return finnhubService.clearQuotesFromDB();
     }
   
 }

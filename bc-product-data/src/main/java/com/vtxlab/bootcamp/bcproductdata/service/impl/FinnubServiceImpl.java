@@ -94,7 +94,6 @@ public class FinnubServiceImpl implements FinnhubService {
 
     System.out.println("List=" + quoteEntities);
     
-    stockQuoteRepository.deleteAll();
     stockQuoteRepository.saveAll(quoteEntities);
 
     return true;
