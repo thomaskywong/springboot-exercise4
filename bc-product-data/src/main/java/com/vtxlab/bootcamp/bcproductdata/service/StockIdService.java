@@ -2,7 +2,7 @@ package com.vtxlab.bootcamp.bcproductdata.service;
 
 import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
+import com.vtxlab.bootcamp.bcproductdata.dto.jph.Symbol;
 import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 
 public interface StockIdService {
@@ -13,5 +13,7 @@ public interface StockIdService {
     Boolean deleteStockId(List<StockId> ids) throws JsonProcessingException;
 
     Boolean deleteAllStockIds() throws JsonProcessingException;
+
+    List<Symbol> getSymbols() throws JsonProcessingException;
 
 }

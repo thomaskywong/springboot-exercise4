@@ -1,7 +1,5 @@
 package com.vtxlab.bootcamp.bcproductdata.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vtxlab.bootcamp.bcproductdata.dto.jph.Coin;
 import com.vtxlab.bootcamp.bcproductdata.entity.CoinIdEntity;
 import com.vtxlab.bootcamp.bcproductdata.exception.InvalidCoinException;
-import com.vtxlab.bootcamp.bcproductdata.infra.ApiResponse;
 import com.vtxlab.bootcamp.bcproductdata.infra.Scheme;
 import com.vtxlab.bootcamp.bcproductdata.infra.Syscode;
 import com.vtxlab.bootcamp.bcproductdata.mapper.CoinIdMapper;
@@ -146,15 +143,8 @@ public class CoinIdServiceImpl implements CoinIdService {
     ApiRespCoins apiResp = objectMapper.readValue(JsonString, ApiRespCoins.class);
 
     List<Coin> coinList = apiResp.getData();
-    // System.out.println(coinList);
 
     return coinList;     
-
-    // String urlString =
-    //     "http://localhost:8090/crypto/coingecko/api/v1/coins/list2";
-    // Coin[] coins = restTemplate.getForObject(urlString, Coin[].class);
-
-    // return Arrays.stream(coins).collect(Collectors.toList());
 
   }
 

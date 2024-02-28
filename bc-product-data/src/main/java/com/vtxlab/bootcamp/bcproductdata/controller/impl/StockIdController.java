@@ -17,9 +17,6 @@ import com.vtxlab.bootcamp.bcproductdata.service.StockIdService;
 public class StockIdController implements StockIdOperation {
 
   @Autowired
-  private FinnhubService finnhubService;
-
-  @Autowired
   private StockIdService stockIdService;
 
   @Override
@@ -46,7 +43,7 @@ public class StockIdController implements StockIdOperation {
 
   @Override
   public List<Symbol> getStocks() throws JsonProcessingException {
-    return finnhubService.getSymbols();
+    return stockIdService.getSymbols();
   }
 }
 

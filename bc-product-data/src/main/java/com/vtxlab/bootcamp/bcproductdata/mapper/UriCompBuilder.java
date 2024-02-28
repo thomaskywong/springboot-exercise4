@@ -3,6 +3,7 @@ package com.vtxlab.bootcamp.bcproductdata.mapper;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.vtxlab.bootcamp.bcproductdata.infra.Currency;
 import com.vtxlab.bootcamp.bcproductdata.infra.Scheme;
+import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 import lombok.Getter;
 
 @Getter
@@ -26,6 +27,18 @@ public class UriCompBuilder {
         .host(host) //
         .port(port).path(basepath) //
         .path(endpoint) //
+        .toUriString();
+  }
+
+  public static String urlQuote(Scheme scheme, String host, int port,
+      String basepath, String quoteEndpoint, StockId stockId) {
+
+    return UriComponentsBuilder.newInstance() //
+        .scheme(scheme.name().toLowerCase()) //
+        .host(host) //
+        .port(port).path(basepath) //
+        .path(quoteEndpoint) //
+        .queryParam("symbol", stockId.getStockId())//
         .toUriString();
   }
 

@@ -5,14 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public interface CryptoOperation {
+public interface QuoteOperation {
 
-  @GetMapping(value = "/coins/markets/save")
+  @GetMapping(value = "/quote")
   @ResponseStatus(value = HttpStatus.OK)
-  Boolean storeCoinsToDB() throws JsonProcessingException;
+  Boolean saveQuoteToDB() throws JsonProcessingException;
 
-  @GetMapping(value = "/coins/markets/clear")
-  @ResponseStatus(value = HttpStatus.OK)
-  Boolean clearCoinsFromDB() throws JsonProcessingException;
-
+  
 }

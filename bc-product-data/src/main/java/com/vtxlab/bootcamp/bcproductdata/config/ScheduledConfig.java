@@ -6,6 +6,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vtxlab.bootcamp.bcproductdata.service.CryptoService;
+import com.vtxlab.bootcamp.bcproductdata.service.FinnhubService;
+import com.vtxlab.bootcamp.bcproductdata.service.impl.FinnubServiceImpl;
 
 @Configuration
 @EnableScheduling
@@ -14,9 +16,34 @@ public class ScheduledConfig {
   @Autowired
   private CryptoService cryptoService;
 
-  // @Scheduled(fixedRate = 30000)
-  @Scheduled(cron = "0 * * * * *") // every xx:xx:00
+  @Autowired
+  private FinnhubService finnhubService;
+
+  @Scheduled(fixedRate = 30000)
+  // @Scheduled(cron = "0 * * * * *") // every xx:xx:00
   void saveCryptoToDB() throws JsonProcessingException {
     cryptoService.storeCoinsToDB();
   }
+
+  @Scheduled(fixedRate = 60000)
+  // @Scheduled(cron = "* * 0 * * *") // every xx:xx:00
+  void reflashCryptoFromDB() throws JsonProcessingException {
+    cryptoService.clearCoinsFromDB();
+    cryptoService.storeCoinsToDB();
+  }
+
+  @Scheduled(fixedRate = 30000)
+  // @Scheduled(cron = "0 * * * * *") // every xx:xx:00
+  void saveQuotesToDB() throws JsonProcessingException {
+    finnhubService.saveQuotesToDB();
+  }
+
+  @Scheduled(fixedRate = 60000)
+  // @Scheduled(cron = "0 * * * * *") // every xx:xx:00
+  void reflashQuotesToDB() throws JsonProcessingException {
+    finnhubService.clearQuotesFromDB();
+    finnhubService.saveQuotesToDB();
+  }
+
+
 }
