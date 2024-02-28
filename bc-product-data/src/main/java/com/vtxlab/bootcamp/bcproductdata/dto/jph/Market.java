@@ -1,6 +1,5 @@
 package com.vtxlab.bootcamp.bcproductdata.dto.jph;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -12,7 +11,7 @@ import lombok.ToString;
 @Builder
 @EqualsAndHashCode
 @ToString
-public class Market implements Serializable {
+public class Market {
 
   @JsonProperty(value = "id")
   private String id;
@@ -56,7 +55,7 @@ public class Market implements Serializable {
   @JsonProperty(value = "market_cap_change_24h")
   private long marketCapChange24h;
   // "market_cap_change_24h": 7074053605,
-  @JsonProperty(value = "market_change_percentage_24h")
+  @JsonProperty(value = "market_cap_change_percentage_24h")
   private double marketCapChangePercent24h;
   // "market_cap_change_percentage_24h": 2.40632,
   @JsonProperty(value = "circulating_supply24h")
