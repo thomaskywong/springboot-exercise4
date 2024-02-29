@@ -9,7 +9,7 @@ import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 @Component
 public class ProfileMapper {
 
-  public ProfileEntity mapProfileEntity(Profile2 profile, LocalDateTime quoteDate, StockId stockId {
+  public ProfileEntity mapProfileEntity(Profile2 profile, LocalDateTime quoteDate, StockId stockId) {
     return ProfileEntity.builder() //
             .quoteDate(quoteDate)// to be prepared before calling method
             .quoteStockCode(stockId.getStockId())// to be prepared before calling method

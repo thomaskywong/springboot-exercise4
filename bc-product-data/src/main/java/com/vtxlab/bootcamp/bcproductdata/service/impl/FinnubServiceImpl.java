@@ -59,6 +59,12 @@ public class FinnubServiceImpl implements FinnhubService {
   @Autowired
   private QuoteMapper quoteMapper;
 
+  @Override
+  public Boolean saveProfilesToDB() throws JsonProcessingException{
+
+    return true;
+  }
+
 
   @Override
   public Boolean saveQuotesToDB() throws JsonProcessingException {

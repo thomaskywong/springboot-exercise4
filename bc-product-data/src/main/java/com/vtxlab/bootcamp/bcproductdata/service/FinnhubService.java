@@ -7,5 +7,7 @@ public interface FinnhubService {
     Boolean saveQuotesToDB() throws JsonProcessingException;
 
     Boolean clearQuotesFromDB() throws JsonProcessingException;
+    
+    Boolean saveProfilesToDB() throws JsonProcessingException;
 
 }
