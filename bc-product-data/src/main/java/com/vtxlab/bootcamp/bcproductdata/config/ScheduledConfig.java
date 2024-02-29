@@ -3,6 +3,7 @@ package com.vtxlab.bootcamp.bcproductdata.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vtxlab.bootcamp.bcproductdata.service.CryptoService;
 import com.vtxlab.bootcamp.bcproductdata.service.FinnhubService;
@@ -17,39 +18,39 @@ public class ScheduledConfig {
   @Autowired
   private FinnhubService finnhubService;
 
-  // @Scheduled(fixedRate = 30000)
+  @Scheduled(fixedRate = 30000)
   // @Scheduled(cron = "0 * * * * *") // every xx:xx:00
   void saveCryptoToDB() throws JsonProcessingException {
     cryptoService.storeCoinsToDB();
   }
 
-  // @Scheduled(fixedRate = 60000)
+  @Scheduled(fixedRate = 60000)
   // @Scheduled(cron = "* * 0 * * *") // every xx:xx:00
   void reflashCryptoFromDB() throws JsonProcessingException {
     cryptoService.clearCoinsFromDB();
     cryptoService.storeCoinsToDB();
   }
 
-  // @Scheduled(fixedRate = 30000)
+  @Scheduled(fixedRate = 30000)
   // @Scheduled(cron = "0 * * * * *") // every xx:xx:00
   void saveQuotesToDB() throws JsonProcessingException {
     finnhubService.saveQuotesToDB();
   }
 
-  // @Scheduled(fixedRate = 60000)
+  @Scheduled(fixedRate = 60000)
   // @Scheduled(cron = "0 * * * * *") // every xx:xx:00
   void reflashQuotesToDB() throws JsonProcessingException {
     finnhubService.clearQuotesFromDB();
     finnhubService.saveQuotesToDB();
   }
 
-  // @Scheduled(fixedRate = 30000)
+  @Scheduled(fixedRate = 30000)
   // @Scheduled(cron = "0 * * * * *") // every xx:xx:00
   void saveProfilesToDB() throws JsonProcessingException {
     finnhubService.saveProfilesToDB();
   }
 
-  // @Scheduled(fixedRate = 60000)
+  @Scheduled(fixedRate = 60000)
   // @Scheduled(cron = "0 * * * * *") // every xx:xx:00
   void reflashProfilesToDB() throws JsonProcessingException {
     finnhubService.clearProfilesFromDB();
