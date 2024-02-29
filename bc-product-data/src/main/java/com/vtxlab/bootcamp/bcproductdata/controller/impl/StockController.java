@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vtxlab.bootcamp.bcproductdata.controller.QuoteOperation;
+import com.vtxlab.bootcamp.bcproductdata.controller.StockOperation;
 import com.vtxlab.bootcamp.bcproductdata.service.FinnhubService;
 
 
 @RestController
 @RequestMapping(value = "/stock/database/api/v1")
-public class QuoteController implements QuoteOperation{
+public class StockController implements StockOperation{
 
     @Autowired
     private FinnhubService finnhubService;
@@ -25,4 +25,25 @@ public class QuoteController implements QuoteOperation{
       return finnhubService.clearQuotesFromDB();
     }
   
+    @Override
+    public Boolean saveProfileToDB() throws JsonProcessingException {
+      return finnhubService.saveProfilesToDB();
+    }
+
+    
+    @Override
+    public Boolean clearProfileToDB() throws JsonProcessingException {
+      return finnhubService.clearProfilesFromDB();
+    }
+
+    @Override
+    public Boolean saveAAPLQuoteToDB() throws JsonProcessingException {
+      return finnhubService.storeAAPLQuoteToDB();
+    }
+
+    @Override
+    public Boolean saveAAPLProfileToDB() throws JsonProcessingException {
+      return finnhubService.storeAAPLProfileToDB();
+    }
+
 }

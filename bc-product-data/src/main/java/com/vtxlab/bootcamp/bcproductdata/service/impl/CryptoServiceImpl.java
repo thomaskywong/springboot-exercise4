@@ -19,6 +19,7 @@ import com.vtxlab.bootcamp.bcproductdata.mapper.MarketMapper;
 import com.vtxlab.bootcamp.bcproductdata.mapper.UriCompBuilder;
 import com.vtxlab.bootcamp.bcproductdata.model.ApiRespMarkets;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
+import com.vtxlab.bootcamp.bcproductdata.model.CoinIdEnum;
 import com.vtxlab.bootcamp.bcproductdata.repository.MarketRepository;
 import com.vtxlab.bootcamp.bcproductdata.service.CoinIdService;
 import com.vtxlab.bootcamp.bcproductdata.service.CryptoService;
@@ -51,7 +52,7 @@ public class CryptoServiceImpl implements CryptoService {
   private ObjectMapper objectMapper;
 
   @Autowired
-  private MarketMapper  marketMapper;
+  private MarketMapper marketMapper;
 
   @Autowired
   private MarketRepository marketRepository;
@@ -61,28 +62,32 @@ public class CryptoServiceImpl implements CryptoService {
 
     List<CoinId> coinIds = coinIdService.getCoinIds();
 
-    if(coinIds.size() == 0) {
-      throw new CoingeckoNotAvailableException(Syscode.COINGECKO_NOT_AVAILABLE_EXCEPTION);
+    if (coinIds.size() == 0) {
+      throw new CoingeckoNotAvailableException(
+          Syscode.COINGECKO_NOT_AVAILABLE_EXCEPTION);
     }
 
-    String ids = coinIds.stream().map(e->e.getCoinId()).collect(Collectors.joining(","));
+    String ids = coinIds.stream().map(e -> e.getCoinId())
+        .collect(Collectors.joining(","));
 
-    String urlString = UriCompBuilder.urlCoinsMarket(Scheme.HTTP, host, port, basepath, marketsEndpoint , Currency.USD, ids);
+    String urlString = UriCompBuilder.urlCoinsMarket(Scheme.HTTP, host, port,
+        basepath, marketsEndpoint, Currency.USD, ids);
 
     // System.out.println(urlString);
 
     String jsonString = restTemplate.getForObject(urlString, String.class);
 
-    ApiRespMarkets apiResp = objectMapper.readValue(jsonString, ApiRespMarkets.class );
+    ApiRespMarkets apiResp =
+        objectMapper.readValue(jsonString, ApiRespMarkets.class);
 
     List<Market> markets = apiResp.getData();
 
     List<MarketEntity> entities = markets.stream() //
-                                        .map( e -> marketMapper.mapMarketEntity(e, Currency.USD)) //
-                                        .collect(Collectors.toList()); 
-    
+        .map(e -> marketMapper.mapMarketEntity(e, Currency.USD)) //
+        .collect(Collectors.toList());
+
     marketRepository.saveAll(entities);
-    
+
     return true;
   }
 
@@ -92,6 +97,39 @@ public class CryptoServiceImpl implements CryptoService {
     return true;
   }
 
-  
+  @Override
+  public Boolean storeBitcoinsToDB() throws JsonProcessingException {
+
+    CoinId id = CoinId.builder()//
+        .coinId(CoinIdEnum.BITCOIN.name().toLowerCase())//
+        .build();
+
+    String urlString = UriCompBuilder.urlCoinsMarket(Scheme.HTTP, host, port,
+        basepath, marketsEndpoint, Currency.USD, id.getCoinId());
+
+    System.out.println(urlString);
+
+    String jsonString = restTemplate.getForObject(urlString, String.class);
+
+    ApiRespMarkets apiResp =
+        objectMapper.readValue(jsonString, ApiRespMarkets.class);
+
+    List<Market> markets = apiResp.getData();
+
+    if (markets.size() == 0) {
+      throw new CoingeckoNotAvailableException(Syscode.COINGECKO_NOT_AVAILABLE_EXCEPTION);
+    }
+
+    List<MarketEntity> entities = markets.stream() //
+    .map(e -> marketMapper.mapMarketEntity(e, Currency.USD)) //
+    .collect(Collectors.toList());
+    
+    marketRepository.saveAll(entities);
+
+    return true;
+
+  }
+
+
 
 }

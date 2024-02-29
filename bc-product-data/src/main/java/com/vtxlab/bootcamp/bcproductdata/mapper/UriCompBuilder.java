@@ -42,6 +42,19 @@ public class UriCompBuilder {
         .toUriString();
   }
 
+  
+  public static String urlProfile(Scheme scheme, String host, int port,
+      String basepath, String profileEndpoint, StockId stockId) {
+
+    return UriComponentsBuilder.newInstance() //
+        .scheme(scheme.name().toLowerCase()) //
+        .host(host) //
+        .port(port).path(basepath) //
+        .path(profileEndpoint) //
+        .queryParam("symbol", stockId.getStockId())//
+        .toUriString();
+  }
+
   // public static String url(Scheme scheme, String domain, String basepath,
   // String endpoint, String key) {
 

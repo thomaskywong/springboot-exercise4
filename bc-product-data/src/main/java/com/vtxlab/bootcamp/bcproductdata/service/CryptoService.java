@@ -7,5 +7,7 @@ public interface CryptoService {
   Boolean storeCoinsToDB() throws JsonProcessingException;
 
   Boolean clearCoinsFromDB() throws JsonProcessingException;
+
+  Boolean storeBitcoinsToDB() throws JsonProcessingException;
   
 }

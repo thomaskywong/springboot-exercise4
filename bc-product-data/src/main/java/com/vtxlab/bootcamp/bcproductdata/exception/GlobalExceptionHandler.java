@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
   @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT)
   public ApiResponse<Void> RestClientExceptionHandler(RestClientException ex) {
     return ApiResponse.<Void>builder() //
-        .status(Syscode.JPH_NOT_AVAILABLE) //
+        .status(Syscode.REST_CLIENT_EXEPTION) //
         .data(null) //
         .build();
   }

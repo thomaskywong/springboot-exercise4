@@ -20,16 +20,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "texternal_stock_finnhub_profile2" )
+@Table(name = "texternal_stock_finnhub_profile2")
 public class ProfileEntity {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(name = "quote_date")
   private LocalDateTime quoteDate;
-  
+
   @Column(name = "quote_stock_code")
   private String quoteStockCode;
 
@@ -39,7 +39,7 @@ public class ProfileEntity {
   @Column(name = "currency")
   private String currency;
 
-  @Column(name = "estimated_currency")
+  @Column(name = "estimate_currency")
   private String estimatedCurrency;
 
   @Column(name = "exchange")
@@ -72,6 +72,5 @@ public class ProfileEntity {
   @Column(name = "weburl")
   private String weburl;
 }
-
 
 
