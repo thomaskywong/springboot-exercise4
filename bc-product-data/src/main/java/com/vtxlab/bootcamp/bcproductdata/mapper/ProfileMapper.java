@@ -4,14 +4,15 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 import com.vtxlab.bootcamp.bcproductdata.dto.jph.Profile2;
 import com.vtxlab.bootcamp.bcproductdata.entity.ProfileEntity;
+import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 
 @Component
 public class ProfileMapper {
 
-  public ProfileEntity mapProfileEntity(Profile2 profile, LocalDateTime quoteDate, String quoteStockCode) {
+  public ProfileEntity mapProfileEntity(Profile2 profile, LocalDateTime quoteDate, StockId stockId {
     return ProfileEntity.builder() //
             .quoteDate(quoteDate)// to be prepared before calling method
-            .quoteStockCode(quoteStockCode)// to be prepared before calling method
+            .quoteStockCode(stockId.getStockId())// to be prepared before calling method
             .country(profile.getCountry())//
             .currency(profile.getCurrency())//
             .estimatedCurrency(profile.getEstimateCurrency())//
