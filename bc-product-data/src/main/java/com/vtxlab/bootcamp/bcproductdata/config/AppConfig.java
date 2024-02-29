@@ -12,5 +12,16 @@ public class AppConfig {
   RestTemplate restTemplate() {
     return new RestTemplate();
   }
+
+  // @Bean
+  // RedisTemplate<String, String> redisTemplate() {
+  //   return new RedisTemplate<>();
+  // }
+
+  // @Bean
+  // ModelMapper modelMapper() {
+  //   return new ModelMapper();
+  // }
+  
   
 }
