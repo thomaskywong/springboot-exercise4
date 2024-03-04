@@ -15,8 +15,9 @@ public class CoinIdMapper {
 
   public CoinIdEntity mapCoinIdEntity(CoinId id) {
     return CoinIdEntity.builder() //
-                 .coinId(id.getCoinId()) //
-                 .build();
+                       .coinId(id.getCoinId()) //
+                       .build();
+    // return new CoinIdEntity(null, id.getCoinId());
   }
   
 }
