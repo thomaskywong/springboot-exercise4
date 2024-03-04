@@ -14,10 +14,10 @@ public class CoinIdMapper {
   }
 
   public CoinIdEntity mapCoinIdEntity(CoinId id) {
-    return CoinIdEntity.builder() //
-                       .coinId(id.getCoinId()) //
-                       .build();
-    // return new CoinIdEntity(null, id.getCoinId());
+
+    CoinIdEntity coinIdEntity = new CoinIdEntity(null, id.getCoinId());
+
+    return coinIdEntity;
   }
   
 }
