@@ -51,4 +51,9 @@ public class StockController implements StockOperation{
       return finnhubService.storeStockEntitiesToDB();
     }
 
+    @Override
+    public Boolean clearStockEntitiesFromDB() throws JsonProcessingException {
+      return finnhubService.clearStockEntitiesFromDB();
+    }
+
 }

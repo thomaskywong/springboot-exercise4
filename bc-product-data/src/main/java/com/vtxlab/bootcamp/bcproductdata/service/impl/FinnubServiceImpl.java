@@ -228,6 +228,14 @@ public class FinnubServiceImpl implements FinnhubService {
 
       StockEntity stockEntity = stockMapper.mapStockEntity(profile, quote, id);
 
+      
+      List<StockIdEntity> stockIdEntities = stockIdRepository.findByStockId(id.getStockId());
+
+      StockIdEntity stockIdEntity = stockIdEntities.get(0);
+
+      stockIdEntity.setStockEntity(stockEntity);
+
+
       stockEntities.add(stockEntity);
     }
 
@@ -237,6 +245,16 @@ public class FinnubServiceImpl implements FinnhubService {
     stockRepository.saveAll(stockEntities);
 
     return true;
+  }
+
+  
+  @Override
+  public Boolean clearStockEntitiesFromDB() throws JsonProcessingException {
+
+    stockRepository.deleteAll();
+
+    return true;
+  
   }
 
 
@@ -262,6 +280,7 @@ public class FinnubServiceImpl implements FinnhubService {
     return apiRespProfile.getData();
 
   }
+
 
   private Quote getQuote(StockId id) {
     // get updated quote time

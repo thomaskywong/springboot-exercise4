@@ -18,6 +18,6 @@ public interface FinnhubService {
 
     Boolean storeStockEntitiesToDB() throws JsonProcessingException;
 
-
+    Boolean clearStockEntitiesFromDB() throws JsonProcessingException;
 
 }

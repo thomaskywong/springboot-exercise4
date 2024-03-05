@@ -35,5 +35,9 @@ public interface StockOperation {
   @ResponseStatus(value = HttpStatus.OK)
   Boolean storeStockEntitiesToDB() throws JsonProcessingException;
 
+  @GetMapping(value = "/stock/entites/clear")
+  @ResponseStatus(value = HttpStatus.OK)
+  Boolean clearStockEntitiesFromDB() throws JsonProcessingException;
+
   
 }

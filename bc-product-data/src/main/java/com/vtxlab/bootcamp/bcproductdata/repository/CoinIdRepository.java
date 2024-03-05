@@ -12,5 +12,7 @@ import java.util.List;
 public interface CoinIdRepository extends JpaRepository<CoinIdEntity, Long> {
 
   List<CoinIdEntity> findByCoinId(String coinId);
+
+  List<CoinIdEntity> findByCoinIdIn(List<String> coinIds);
   
 }

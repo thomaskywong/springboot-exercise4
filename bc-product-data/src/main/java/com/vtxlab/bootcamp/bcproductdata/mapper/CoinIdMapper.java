@@ -15,7 +15,7 @@ public class CoinIdMapper {
 
   public CoinIdEntity mapCoinIdEntity(CoinId id) {
 
-    CoinIdEntity coinIdEntity = new CoinIdEntity(null, id.getCoinId());
+    CoinIdEntity coinIdEntity = new CoinIdEntity(null, id.getCoinId(), null);
 
     return coinIdEntity;
   }

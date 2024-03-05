@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,8 +34,12 @@ public class StockIdEntity implements Serializable {
   @Column(name = "stock_code")
   private String stockId;
 
+  @OneToOne(mappedBy = "stockIdEntity", cascade = CascadeType.ALL, orphanRemoval = true) // serialization
+  @JsonManagedReference // prevent infinite loop
+  private StockEntity stockEntity; 
+
   @OneToMany(mappedBy = "stockIdEntity2", cascade = CascadeType.ALL, orphanRemoval = true) // serialization
   @JsonManagedReference // prevent infinite loop
-  private List<StockDailyEntity> posts = new ArrayList<>(); 
+  private List<StockDailyEntity> stockDailyEntities = new ArrayList<>(); 
 
 }

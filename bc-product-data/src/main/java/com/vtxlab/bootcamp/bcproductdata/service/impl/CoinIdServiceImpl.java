@@ -19,6 +19,7 @@ import com.vtxlab.bootcamp.bcproductdata.mapper.UriCompBuilder;
 import com.vtxlab.bootcamp.bcproductdata.model.ApiRespCoins;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
 import com.vtxlab.bootcamp.bcproductdata.repository.CoinIdRepository;
+import com.vtxlab.bootcamp.bcproductdata.repository.CoinRepository;
 import com.vtxlab.bootcamp.bcproductdata.service.CoinIdService;
 
 @Service
@@ -41,6 +42,9 @@ public class CoinIdServiceImpl implements CoinIdService {
 
   @Autowired
   private CoinIdRepository coinIdRepository;
+
+  // @Autowired
+  // private CoinRepository coinRepostory;
 
   @Autowired
   private ObjectMapper objectMapper;
@@ -71,15 +75,13 @@ public class CoinIdServiceImpl implements CoinIdService {
         .map(e -> coinIdMapper.mapCoinId(e)) //
         .collect(Collectors.toSet());
 
+    for (CoinId id : ids) {
+      if (coinIds.contains(id))
+        continue;
 
-    coinIds.addAll(ids);
+      coinIdRepository.save(coinIdMapper.mapCoinIdEntity(id));
+    }
 
-    List<CoinIdEntity> entities = coinIds.stream() //
-        .map(e -> coinIdMapper.mapCoinIdEntity(e)) //
-        .collect(Collectors.toList());
-
-    coinIdRepository.deleteAll();
-    coinIdRepository.saveAll(entities);
 
     return ids;
 
@@ -99,27 +101,21 @@ public class CoinIdServiceImpl implements CoinIdService {
   @Override
   public Boolean deleteCoinId(List<CoinId> ids) throws JsonProcessingException {
 
-    // System.out.println("Delete Coin.");
     Set<CoinId> coinIds = coinIdRepository.findAll() //
         .stream() //
         .map(e -> coinIdMapper.mapCoinId(e)) //
         .collect(Collectors.toSet());
-
-    for (CoinId id : ids) {
-      if (!(coinIds.contains(id))) {
-        return false;
-      }
+    
+    if (!(coinIds.containsAll(ids))) {
+      return false;
     }
 
-    coinIds.removeAll(ids);
+    List<String> idStrings = ids.stream().map(e -> e.getCoinId()).collect(Collectors.toList()); 
 
-    List<CoinIdEntity> entities = coinIds.stream() //
-        .map(e -> coinIdMapper.mapCoinIdEntity(e)) //
-        .collect(Collectors.toList());
+    List<CoinIdEntity> entitiesToRemove = coinIdRepository.findByCoinIdIn(idStrings);
 
-    coinIdRepository.deleteAll();
-    coinIdRepository.saveAll(entities);
-
+    coinIdRepository.deleteAll(entitiesToRemove);
+   
     return true;
 
   }
@@ -136,15 +132,16 @@ public class CoinIdServiceImpl implements CoinIdService {
   public List<Coin> getCoins() throws JsonProcessingException {
 
     String urlString2 =
-    UriCompBuilder.url(Scheme.HTTP, host, port, basepath, listEndpoint);
+        UriCompBuilder.url(Scheme.HTTP, host, port, basepath, listEndpoint);
 
     String JsonString = restTemplate.getForObject(urlString2, String.class);
 
-    ApiRespCoins apiResp = objectMapper.readValue(JsonString, ApiRespCoins.class);
+    ApiRespCoins apiResp =
+        objectMapper.readValue(JsonString, ApiRespCoins.class);
 
     List<Coin> coinList = apiResp.getData();
 
-    return coinList;     
+    return coinList;
 
   }
 

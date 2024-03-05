@@ -21,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 // @Builder
-@ToString
+// @ToString
 @Entity
 @Table(name = "tproduct_coins")
 public class CoinEntity implements Serializable {

@@ -2,9 +2,12 @@ package com.vtxlab.bootcamp.bcproductdata.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vtxlab.bootcamp.bcproductdata.controller.CryptoOperation;
+import com.vtxlab.bootcamp.bcproductdata.entity.MarketEntity;
+import com.vtxlab.bootcamp.bcproductdata.repository.MarketRepository;
 import com.vtxlab.bootcamp.bcproductdata.service.CryptoService;
 
 @RestController
@@ -13,6 +16,9 @@ public class CryptoController implements CryptoOperation {
 
   @Autowired
   private CryptoService cryptoService;
+
+  @Autowired
+  private MarketRepository marketRepository;
 
   public Boolean storeCoinsToDB() throws JsonProcessingException {
     return cryptoService.storeCoinsToDB();
@@ -33,5 +39,13 @@ public class CryptoController implements CryptoOperation {
   public Boolean clearCoinEntitiesFromDB() throws JsonProcessingException {
     return cryptoService.clearCoinEntitiesFromDB();
   }
+
+  @Override
+  public MarketEntity getMarketEntity(String symbol) throws JsonProcessingException {
+
+    return marketRepository.getMostRecentMarketEntityBySymbol(symbol);
+
+  }
+
 
 }

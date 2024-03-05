@@ -96,20 +96,15 @@ public class StockIdServiceImpl implements StockIdService {
         .map(e -> stockIdMapper.mapSymbolId(e)) //
         .collect(Collectors.toSet());
 
-    for (StockId id : ids) {
-      if (!(stockIds.contains(id))) {
-        return false;
-      }
+    if (!(stockIds.containsAll(ids))) {
+      return false;
     }
 
-    stockIds.removeAll(ids);
+    List<String> idStrings = ids.stream().map(e -> e.getStockId()).collect(Collectors.toList());
 
-    List<StockIdEntity> entities = stockIds.stream() //
-        .map(e -> stockIdMapper.mapSymbolIdEntity(e)) //
-        .collect(Collectors.toList());
-
-    stockIdRepository.deleteAll();
-    stockIdRepository.saveAll(entities);
+    List<StockIdEntity> entitiesToRemove = stockIdRepository.findByStockIdIn(idStrings);
+    
+    stockIdRepository.deleteAll(entitiesToRemove);
 
     return true;
 

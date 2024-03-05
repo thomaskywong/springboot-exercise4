@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vtxlab.bootcamp.bcproductdata.dto.Market;
 import com.vtxlab.bootcamp.bcproductdata.entity.CoinEntity;
+import com.vtxlab.bootcamp.bcproductdata.entity.CoinIdEntity;
 import com.vtxlab.bootcamp.bcproductdata.entity.MarketEntity;
 import com.vtxlab.bootcamp.bcproductdata.exception.CoingeckoNotAvailableException;
 import com.vtxlab.bootcamp.bcproductdata.infra.Currency;
@@ -24,10 +25,12 @@ import com.vtxlab.bootcamp.bcproductdata.mapper.UriCompBuilder;
 import com.vtxlab.bootcamp.bcproductdata.model.ApiRespMarkets;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinIdEnum;
+import com.vtxlab.bootcamp.bcproductdata.repository.CoinIdRepository;
 import com.vtxlab.bootcamp.bcproductdata.repository.CoinRepository;
 import com.vtxlab.bootcamp.bcproductdata.repository.MarketRepository;
 import com.vtxlab.bootcamp.bcproductdata.service.CoinIdService;
 import com.vtxlab.bootcamp.bcproductdata.service.CryptoService;
+import jakarta.transaction.Transactional;
 
 @Service
 public class CryptoServiceImpl implements CryptoService {
@@ -68,10 +71,10 @@ public class CryptoServiceImpl implements CryptoService {
   @Autowired
   private MarketRepository marketRepository;
 
-  // @Autowired
-  // private CoinIdRepository coinIdRepository;
+  @Autowired
+  private CoinIdRepository coinIdRepository;
 
-  
+
   @Autowired
   private CoinRepository coinRepository;
 
@@ -105,8 +108,6 @@ public class CryptoServiceImpl implements CryptoService {
     String urlString = UriCompBuilder.urlCoinsMarket(Scheme.HTTP, host, port,
         basepath, marketsEndpoint, Currency.USD, id.getCoinId());
 
-    System.out.println(urlString);
-
     String jsonString = restTemplate.getForObject(urlString, String.class);
 
     ApiRespMarkets apiResp =
@@ -130,45 +131,52 @@ public class CryptoServiceImpl implements CryptoService {
   }
 
   @Override
+  @Transactional
   public Boolean storeCoinEntitiesToDB() throws JsonProcessingException {
 
-    // System.out.println("Service");
-    
-    List<Market> markets = this.getMarkets(Currency.USD);
+    this.clearCoinEntitiesFromDB();
 
     List<CoinId> coinIds = coinIdService.getCoinIds();
 
-    // List<CoinIdEntity> coinIdEntities = new ArrayList<>();
-    List<CoinEntity> coinEntities = new ArrayList<>();
-
     for (CoinId id : coinIds) {
-      Optional<Market> marketOpt = markets.stream()//
-                            .filter(e-> e.getId().equals(id.getCoinId()))//
-                            .findFirst();
 
-      if(marketOpt.isEmpty()) {
-        throw new CoingeckoNotAvailableException(Syscode.COINGECKO_NOT_AVAILABLE_EXCEPTION);
+      MarketEntity marketEntity =
+          marketRepository.getMostRecentMarketEntityBySymbol(id.getCoinId());
+
+      if (marketEntity == null) {
+
+        Market market = this.getMarket(Currency.USD, id);
+
+        marketEntity = marketMapper.mapMarketEntity(market, Currency.USD);
+
       }
 
-      Market market = marketOpt.get();
-      // System.out.println(market);
+      CoinEntity coinEntity = coinEntityMapper.mapCoinEntity(marketEntity, id);
 
-      CoinEntity coinEntity = coinEntityMapper.mapCoinEntity(market, id);
-
-      coinEntities.add(coinEntity);
+      coinRepository.save(coinEntity);
 
     }
-    
-    // System.out.println(coinEntities);
-
-    coinRepository.deleteAll();
-    coinRepository.saveAll(coinEntities);
 
     return true;
   }
 
+  @Override
+  @Transactional
+  public Boolean clearCoinEntitiesFromDB() throws JsonProcessingException {
 
-  private List<Market> getMarkets(Currency currency) throws JsonProcessingException {
+    List<CoinIdEntity> coinIdEntities = coinIdRepository.findAll();
+    
+    for (CoinIdEntity coinIdEntity : coinIdEntities) {
+      coinIdEntity.setCoinEntity(null);
+    }
+
+    coinRepository.deleteAll();
+
+    return true;
+  }
+
+  private List<Market> getMarkets(Currency currency)
+      throws JsonProcessingException {
 
     List<CoinId> coinIds = coinIdService.getCoinIds();
 
@@ -183,8 +191,6 @@ public class CryptoServiceImpl implements CryptoService {
     String urlString = UriCompBuilder.urlCoinsMarket(Scheme.HTTP, host, port,
         basepath, marketsEndpoint, Currency.USD, ids);
 
-    // System.out.println(urlString);
-
     String jsonString = restTemplate.getForObject(urlString, String.class);
 
     ApiRespMarkets apiResp =
@@ -195,13 +201,26 @@ public class CryptoServiceImpl implements CryptoService {
     return markets;
   }
 
-  @Override
-  public Boolean clearCoinEntitiesFromDB() throws JsonProcessingException {
-    coinRepository.deleteAll();
-    return true;
+  private Market getMarket(Currency currency, CoinId id) throws JsonProcessingException{
+
+    String idString = id.getCoinId();
+
+    String urlString = UriCompBuilder.urlCoinsMarket(Scheme.HTTP, host, port,
+        basepath, marketsEndpoint, Currency.USD, idString);
+
+    String jsonString = restTemplate.getForObject(urlString, String.class);
+
+    ApiRespMarkets apiResp =
+        objectMapper.readValue(jsonString, ApiRespMarkets.class);
+
+    List<Market> markets = apiResp.getData();
+
+    if (markets.size() == 0) {
+      throw new CoingeckoNotAvailableException(Syscode.COINGECKO_NOT_AVAILABLE_EXCEPTION);
+    }
+
+    return markets.get(0);
   }
-
-
 
 
 
