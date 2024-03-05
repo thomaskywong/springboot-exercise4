@@ -1,7 +1,7 @@
 package com.vtxlab.bootcamp.bcproductdata.model;
 
 import java.util.List;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Market;
+import com.vtxlab.bootcamp.bcproductdata.dto.Market;
 import lombok.Getter;
 
 

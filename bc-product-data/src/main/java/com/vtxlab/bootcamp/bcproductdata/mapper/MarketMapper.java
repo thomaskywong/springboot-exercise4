@@ -1,7 +1,7 @@
 package com.vtxlab.bootcamp.bcproductdata.mapper;
 
 import org.springframework.stereotype.Component;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Market;
+import com.vtxlab.bootcamp.bcproductdata.dto.Market;
 import com.vtxlab.bootcamp.bcproductdata.entity.MarketEntity;
 import com.vtxlab.bootcamp.bcproductdata.infra.Currency;
 

@@ -31,5 +31,9 @@ public interface StockOperation {
   @ResponseStatus(value = HttpStatus.OK)
   Boolean saveAAPLProfileToDB() throws JsonProcessingException;
 
+  @GetMapping(value = "/stock/entites/save")
+  @ResponseStatus(value = HttpStatus.OK)
+  Boolean storeStockEntitiesToDB() throws JsonProcessingException;
+
   
 }

@@ -1,6 +1,6 @@
 package com.vtxlab.bootcamp.bcproductdata.model;
 
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Profile2;
+import com.vtxlab.bootcamp.bcproductdata.dto.Profile2;
 import lombok.Getter;
 
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Symbol;
+import com.vtxlab.bootcamp.bcproductdata.dto.Symbol;
 import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 
 public interface StockIdOperation {

@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import org.springframework.stereotype.Component;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Quote;
+import com.vtxlab.bootcamp.bcproductdata.dto.Quote;
 import com.vtxlab.bootcamp.bcproductdata.entity.QuoteEntity;
 import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 

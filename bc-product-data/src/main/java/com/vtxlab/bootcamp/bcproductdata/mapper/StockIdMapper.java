@@ -15,9 +15,9 @@ public class StockIdMapper {
   }
 
   public StockIdEntity mapSymbolIdEntity(StockId id) {
-    return StockIdEntity.builder() //
-                 .stockId(id.getStockId()) //
-                 .build();
+    StockIdEntity stockIdEntity = new StockIdEntity();
+    stockIdEntity.setStockId(id.getStockId());
+    return stockIdEntity;
   }
   
   

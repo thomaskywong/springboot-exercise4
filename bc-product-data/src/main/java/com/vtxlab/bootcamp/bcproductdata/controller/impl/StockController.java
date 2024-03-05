@@ -46,4 +46,9 @@ public class StockController implements StockOperation{
       return finnhubService.storeAAPLProfileToDB();
     }
 
+    @Override
+    public Boolean storeStockEntitiesToDB() throws JsonProcessingException {
+      return finnhubService.storeStockEntitiesToDB();
+    }
+
 }

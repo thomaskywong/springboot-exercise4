@@ -20,4 +20,8 @@ public interface CryptoOperation {
   @ResponseStatus(value = HttpStatus.OK)
   Boolean storeCoinEntitiesToDB() throws JsonProcessingException;
 
+  @GetMapping(value = "/coins/entites/clear")
+  @ResponseStatus(value = HttpStatus.OK)
+  Boolean clearCoinEntitiesFromDB() throws JsonProcessingException;
+
 }

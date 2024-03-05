@@ -2,7 +2,7 @@ package com.vtxlab.bootcamp.bcproductdata.mapper;
 
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Profile2;
+import com.vtxlab.bootcamp.bcproductdata.dto.Profile2;
 import com.vtxlab.bootcamp.bcproductdata.entity.ProfileEntity;
 import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Coin;
+import com.vtxlab.bootcamp.bcproductdata.dto.Coin;
 import com.vtxlab.bootcamp.bcproductdata.entity.CoinIdEntity;
 import com.vtxlab.bootcamp.bcproductdata.exception.InvalidCoinException;
 import com.vtxlab.bootcamp.bcproductdata.infra.Scheme;

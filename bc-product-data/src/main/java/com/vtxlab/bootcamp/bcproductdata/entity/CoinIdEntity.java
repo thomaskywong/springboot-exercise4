@@ -30,8 +30,4 @@ public class CoinIdEntity implements Serializable {
   @Column(name = "coin_code")
   private String coinId;
 
-  // @OneToOne(mappedBy = "coinIdEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-  // @JsonManagedReference
-  // private CoinEntity CoinEntity;
-
 }

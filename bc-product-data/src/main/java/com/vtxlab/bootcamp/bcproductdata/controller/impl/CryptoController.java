@@ -29,4 +29,9 @@ public class CryptoController implements CryptoOperation {
     return cryptoService.storeCoinEntitiesToDB();
   }
 
+  @Override
+  public Boolean clearCoinEntitiesFromDB() throws JsonProcessingException {
+    return cryptoService.clearCoinEntitiesFromDB();
+  }
+
 }

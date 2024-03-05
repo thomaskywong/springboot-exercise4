@@ -11,22 +11,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Market;
+import com.vtxlab.bootcamp.bcproductdata.dto.Market;
 import com.vtxlab.bootcamp.bcproductdata.entity.CoinEntity;
-import com.vtxlab.bootcamp.bcproductdata.entity.CoinIdEntity;
 import com.vtxlab.bootcamp.bcproductdata.entity.MarketEntity;
 import com.vtxlab.bootcamp.bcproductdata.exception.CoingeckoNotAvailableException;
 import com.vtxlab.bootcamp.bcproductdata.infra.Currency;
 import com.vtxlab.bootcamp.bcproductdata.infra.Scheme;
 import com.vtxlab.bootcamp.bcproductdata.infra.Syscode;
 import com.vtxlab.bootcamp.bcproductdata.mapper.CoinEntityMapper;
-import com.vtxlab.bootcamp.bcproductdata.mapper.CoinIdMapper;
 import com.vtxlab.bootcamp.bcproductdata.mapper.MarketMapper;
 import com.vtxlab.bootcamp.bcproductdata.mapper.UriCompBuilder;
 import com.vtxlab.bootcamp.bcproductdata.model.ApiRespMarkets;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinIdEnum;
-import com.vtxlab.bootcamp.bcproductdata.repository.CoinIdRepository;
 import com.vtxlab.bootcamp.bcproductdata.repository.CoinRepository;
 import com.vtxlab.bootcamp.bcproductdata.repository.MarketRepository;
 import com.vtxlab.bootcamp.bcproductdata.service.CoinIdService;
@@ -65,14 +62,14 @@ public class CryptoServiceImpl implements CryptoService {
   @Autowired
   private CoinEntityMapper coinEntityMapper;
 
-  @Autowired
-  private CoinIdMapper coinIdMapper;
+  // @Autowired
+  // private CoinIdMapper coinIdMapper;
 
   @Autowired
   private MarketRepository marketRepository;
 
-  @Autowired
-  private CoinIdRepository coinIdRepository;
+  // @Autowired
+  // private CoinIdRepository coinIdRepository;
 
   
   @Autowired
@@ -141,7 +138,7 @@ public class CryptoServiceImpl implements CryptoService {
 
     List<CoinId> coinIds = coinIdService.getCoinIds();
 
-    List<CoinIdEntity> coinIdEntities = new ArrayList<>();
+    // List<CoinIdEntity> coinIdEntities = new ArrayList<>();
     List<CoinEntity> coinEntities = new ArrayList<>();
 
     for (CoinId id : coinIds) {
@@ -162,7 +159,7 @@ public class CryptoServiceImpl implements CryptoService {
 
     }
     
-    System.out.println(coinEntities);
+    // System.out.println(coinEntities);
 
     coinRepository.deleteAll();
     coinRepository.saveAll(coinEntities);
@@ -196,6 +193,12 @@ public class CryptoServiceImpl implements CryptoService {
     List<Market> markets = apiResp.getData();
 
     return markets;
+  }
+
+  @Override
+  public Boolean clearCoinEntitiesFromDB() throws JsonProcessingException {
+    coinRepository.deleteAll();
+    return true;
   }
 
 

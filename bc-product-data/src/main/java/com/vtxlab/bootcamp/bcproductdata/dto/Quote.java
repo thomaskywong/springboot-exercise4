@@ -1,4 +1,4 @@
-package com.vtxlab.bootcamp.bcproductdata.dto.jph;
+package com.vtxlab.bootcamp.bcproductdata.dto;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

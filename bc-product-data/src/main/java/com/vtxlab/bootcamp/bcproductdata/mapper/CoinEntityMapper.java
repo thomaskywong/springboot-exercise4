@@ -1,10 +1,9 @@
 package com.vtxlab.bootcamp.bcproductdata.mapper;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Market;
+import com.vtxlab.bootcamp.bcproductdata.dto.Market;
 import com.vtxlab.bootcamp.bcproductdata.entity.CoinEntity;
 import com.vtxlab.bootcamp.bcproductdata.entity.CoinIdEntity;
 import com.vtxlab.bootcamp.bcproductdata.exception.InvalidCoinException;
@@ -15,8 +14,8 @@ import com.vtxlab.bootcamp.bcproductdata.repository.CoinIdRepository;
 @Component
 public class CoinEntityMapper {
 
-  @Autowired 
-  private CoinIdMapper coinIdMapper;
+  // @Autowired 
+  // private CoinIdMapper coinIdMapper;
 
   @Autowired
   private CoinIdRepository coinIdRepository; 
@@ -38,7 +37,7 @@ public class CoinEntityMapper {
                                           (double)(long) market.getMarketCap(),//
                                           market.getImage(), //
                                           coinIdEntity);
-    
+ 
     // coinIdEntity.setCoinEntity(coinEntity);
     
     return coinEntity;

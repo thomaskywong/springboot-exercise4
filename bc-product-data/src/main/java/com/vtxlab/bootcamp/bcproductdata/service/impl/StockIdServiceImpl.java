@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Symbol;
+import com.vtxlab.bootcamp.bcproductdata.dto.Symbol;
 import com.vtxlab.bootcamp.bcproductdata.entity.StockIdEntity;
 import com.vtxlab.bootcamp.bcproductdata.exception.InvalidStockSymbolException;
 import com.vtxlab.bootcamp.bcproductdata.infra.Scheme;

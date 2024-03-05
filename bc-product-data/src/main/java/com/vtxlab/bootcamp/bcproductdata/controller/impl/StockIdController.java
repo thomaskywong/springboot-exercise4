@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vtxlab.bootcamp.bcproductdata.controller.StockIdOperation;
-import com.vtxlab.bootcamp.bcproductdata.dto.jph.Symbol;
+import com.vtxlab.bootcamp.bcproductdata.dto.Symbol;
 import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 import com.vtxlab.bootcamp.bcproductdata.service.StockIdService;
 
