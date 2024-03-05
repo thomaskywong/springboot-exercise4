@@ -19,7 +19,6 @@ import com.vtxlab.bootcamp.bcproductdata.mapper.UriCompBuilder;
 import com.vtxlab.bootcamp.bcproductdata.model.ApiRespCoins;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
 import com.vtxlab.bootcamp.bcproductdata.repository.CoinIdRepository;
-import com.vtxlab.bootcamp.bcproductdata.repository.CoinRepository;
 import com.vtxlab.bootcamp.bcproductdata.service.CoinIdService;
 
 @Service
