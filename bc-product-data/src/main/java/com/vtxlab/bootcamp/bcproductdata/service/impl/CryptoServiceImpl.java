@@ -172,6 +172,11 @@ public class CryptoServiceImpl implements CryptoService {
     return true;
   }
 
+  @Override
+  public List<CoinEntity> getCoinMarketPrices() {
+    return coinRepository.findAll();
+  }
+
   private List<Market> getMarkets(Currency currency)
       throws JsonProcessingException {
 

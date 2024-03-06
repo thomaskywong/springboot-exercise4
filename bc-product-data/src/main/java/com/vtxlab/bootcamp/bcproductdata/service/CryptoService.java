@@ -1,6 +1,8 @@
 package com.vtxlab.bootcamp.bcproductdata.service;
 
+import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.vtxlab.bootcamp.bcproductdata.entity.CoinEntity;
 
 public interface CryptoService {
 
@@ -14,5 +16,5 @@ public interface CryptoService {
 
   Boolean clearCoinEntitiesFromDB() throws JsonProcessingException;
 
-  
+  List<CoinEntity> getCoinMarketPrices() throws JsonProcessingException;
 }

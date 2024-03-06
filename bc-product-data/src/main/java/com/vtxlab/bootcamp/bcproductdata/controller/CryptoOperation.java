@@ -1,33 +1,20 @@
 package com.vtxlab.bootcamp.bcproductdata.controller;
 
+import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vtxlab.bootcamp.bcproductdata.entity.MarketEntity;
+import com.vtxlab.bootcamp.bcproductdata.dto.Product;
+import com.vtxlab.bootcamp.bcproductdata.infra.ApiResponse;
 
 public interface CryptoOperation {
 
-  @GetMapping(value = "/coins/markets/save")
+  @GetMapping(value = "/product/coins")
   @ResponseStatus(value = HttpStatus.OK)
-  Boolean storeCoinsToDB() throws JsonProcessingException;
-
-  @GetMapping(value = "/coins/markets/clear")
-  @ResponseStatus(value = HttpStatus.OK)
-  Boolean clearCoinsFromDB() throws JsonProcessingException;
-
+  @CrossOrigin
+  ApiResponse<List<Product>> getCoinMarketPrices() throws JsonProcessingException;
   
-  @GetMapping(value = "/coins/entites/save")
-  @ResponseStatus(value = HttpStatus.OK)
-  Boolean storeCoinEntitiesToDB() throws JsonProcessingException;
-
-  @GetMapping(value = "/coins/entites/clear")
-  @ResponseStatus(value = HttpStatus.OK)
-  Boolean clearCoinEntitiesFromDB() throws JsonProcessingException;
-
-  @GetMapping(value = "/coins/entites")
-  @ResponseStatus(value = HttpStatus.OK)
-  MarketEntity getMarketEntity(@RequestParam String symbol) throws JsonProcessingException;
 
 }

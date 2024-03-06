@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vtxlab.bootcamp.bcproductdata.controller.StockIdOperation;
+import com.vtxlab.bootcamp.bcproductdata.controller.StockIdDBOperation;
 import com.vtxlab.bootcamp.bcproductdata.dto.Symbol;
 import com.vtxlab.bootcamp.bcproductdata.model.StockId;
 import com.vtxlab.bootcamp.bcproductdata.service.StockIdService;
@@ -13,7 +13,7 @@ import com.vtxlab.bootcamp.bcproductdata.service.StockIdService;
 
 @RestController
 @RequestMapping(value = "/stock/api/v1")
-public class StockIdController implements StockIdOperation {
+public class StockIdDBController implements StockIdDBOperation {
 
   @Autowired
   private StockIdService stockIdService;

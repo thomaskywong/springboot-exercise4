@@ -11,7 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vtxlab.bootcamp.bcproductdata.dto.Coin;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
 
-public interface CoinIdOperation {
+public interface CoinIdDBOperation {
 
   @PostMapping(value = "/coin_ids/add")
   @ResponseStatus(value = HttpStatus.OK)

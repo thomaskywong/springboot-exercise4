@@ -1,5 +1,6 @@
 package com.vtxlab.bootcamp.bcproductdata.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import jakarta.persistence.Column;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table(name = "texternal_stock_finnhub_profile2")
-public class ProfileEntity {
+public class ProfileEntity implements Serializable{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

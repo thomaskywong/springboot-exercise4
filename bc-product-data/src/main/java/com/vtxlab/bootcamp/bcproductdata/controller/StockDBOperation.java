@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public interface StockOperation {
+public interface StockDBOperation {
 
   @GetMapping(value = "/quote/save")
   @ResponseStatus(value = HttpStatus.OK)

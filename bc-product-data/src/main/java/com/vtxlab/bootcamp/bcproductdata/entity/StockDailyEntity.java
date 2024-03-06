@@ -1,5 +1,6 @@
 package com.vtxlab.bootcamp.bcproductdata.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
@@ -24,7 +25,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "tproduct_stocks_daily")
-public class StockDailyEntity {
+public class StockDailyEntity implements Serializable{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

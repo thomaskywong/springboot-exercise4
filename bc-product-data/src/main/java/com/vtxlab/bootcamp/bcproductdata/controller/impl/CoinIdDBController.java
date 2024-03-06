@@ -5,14 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vtxlab.bootcamp.bcproductdata.controller.CoinIdOperation;
+import com.vtxlab.bootcamp.bcproductdata.controller.CoinIdDBOperation;
 import com.vtxlab.bootcamp.bcproductdata.dto.Coin;
 import com.vtxlab.bootcamp.bcproductdata.model.CoinId;
 import com.vtxlab.bootcamp.bcproductdata.service.CoinIdService;
 
 @RestController
 @RequestMapping(value = "/crypto/api/v1")
-public class CoinIdController implements CoinIdOperation {
+public class CoinIdDBController implements CoinIdDBOperation {
 
   @Autowired
   private CoinIdService coinIdService;

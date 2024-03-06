@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vtxlab.bootcamp.bcproductdata.controller.StockOperation;
+import com.vtxlab.bootcamp.bcproductdata.controller.StockDBOperation;
 import com.vtxlab.bootcamp.bcproductdata.service.FinnhubService;
 
 
 @RestController
 @RequestMapping(value = "/stock/database/api/v1")
-public class StockController implements StockOperation{
+public class StockDBController implements StockDBOperation{
 
     @Autowired
     private FinnhubService finnhubService;

@@ -9,8 +9,8 @@ import lombok.ToString;
 
 @Getter
 @Builder
-@EqualsAndHashCode
 @ToString
+@EqualsAndHashCode
 public class Market {
 
   @JsonProperty(value = "id")
